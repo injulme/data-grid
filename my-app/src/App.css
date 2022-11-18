@@ -1,0 +1,19 @@
+table {
+  width: 300px;
+  margin: 50px;
+
+  border: 2px solid rgba(125, 171, 107, 0.883);
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid rgba(125, 171, 107, 0.883);
+  padding: 10px 5px;
+}
+
+th {
+  background-color: rgba(125, 171, 107, 0.883);
+  color: white;
+  cursor: pointer;
+}
