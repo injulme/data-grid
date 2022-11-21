@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import "./App.css";
 
 function App() {
-  //tzzzzz
   const [data, setData] = useState(initialData);
   const [isAsc, setIsAsc] = useState(false);
   const onSorting = (field) => {
