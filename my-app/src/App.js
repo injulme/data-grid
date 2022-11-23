@@ -1,9 +1,21 @@
 import { useMemo, useState } from "react";
+import { faker } from '@faker-js/faker';
 import "./App.css";
 
 function App() {
-  const [data, setData] = useState(initialData);
+  faker.locale = 'ko';
+
+  const [data, setData] = useState([]);
   const [isAsc, setIsAsc] = useState(false);
+
+  const createRandom = () => {
+    return {id: faker.datatype.uuid(), name: faker.name.firstName() + faker.name.lastName(), age: Math.floor(Math.random() * 100), gender: 'M'};
+  }
+  Array.from ({length: 30}).forEach(() => {
+    data.push(createRandom())
+  })
+
+
   const onSorting = (field) => {
     const clone = [...data];
     const sorting = clone.sort((a, b) =>
@@ -15,9 +27,9 @@ function App() {
   };
 
   const memoData = useMemo(() => {
-    return data.map((v, i) => {
+    return data.map((v,) => {
       return (
-        <tr key={i}>
+        <tr key={v.id}>
           <td>{v.name}</td>
           <td>{v.age}</td>
           <td>{v.gender === "M" ? "남" : "여"}</td>
@@ -25,6 +37,9 @@ function App() {
       );
     });
   }, [data]);
+
+
+
 
   return (
     <table>
@@ -56,38 +71,6 @@ const columns = [
   {
     field: "gender",
     label: "성별",
-  },
-];
-const initialData = [
-  {
-    name: "김미정",
-    age: 30,
-    gender: "W",
-  },
-  {
-    name: "정효진",
-    age: 25,
-    gender: "W",
-  },
-  {
-    name: "김아영",
-    age: 22,
-    gender: "W",
-  },
-  {
-    name: "김태열",
-    age: 27,
-    gender: "M",
-  },
-  {
-    name: "지수림",
-    age: 25,
-    gender: "W",
-  },
-  {
-    name: "홍성재",
-    age: 27,
-    gender: "M",
   },
 ];
 
