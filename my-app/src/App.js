@@ -1,20 +1,26 @@
 import { useMemo, useState } from "react";
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import "./App.css";
 
 function App() {
-  faker.locale = 'ko';
+  faker.locale = "ko";
 
   const [data, setData] = useState([]);
   const [isAsc, setIsAsc] = useState(false);
 
   const createRandom = () => {
-    return {id: faker.datatype.uuid(), name: faker.name.firstName() + faker.name.lastName(), age: Math.floor(Math.random() * 100), gender: 'M'};
-  }
-  Array.from ({length: 30}).forEach(() => {
-    data.push(createRandom())
-  })
+    const gender = Math.floor(Math.random() * 2);
 
+    return {
+      id: faker.datatype.uuid(),
+      name: faker.name.firstName() + faker.name.lastName(),
+      age: Math.floor(Math.random() * 100),
+      gender: gender === 0 ? "M" : "W",
+    };
+  };
+  Array.from({ length: 30 }).forEach(() => {
+    data.push(createRandom());
+  });
 
   const onSorting = (field) => {
     const clone = [...data];
@@ -27,7 +33,7 @@ function App() {
   };
 
   const memoData = useMemo(() => {
-    return data.map((v,) => {
+    return data.map((v) => {
       return (
         <tr key={v.id}>
           <td>{v.name}</td>
@@ -37,9 +43,6 @@ function App() {
       );
     });
   }, [data]);
-
-
-
 
   return (
     <table>
